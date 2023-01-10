@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/pbkdf2.js"></script>
+        <script>
+            function encrypt(text, key) {
+                return CryptoJS.AES.encrypt(text, key).toString();
+            }
+
+            function decrypt(text, key) {
+                const bytes = CryptoJS.AES.decrypt(text, key);
+                return bytes.toString(CryptoJS.enc.Utf8);
+            }
+
+            window.onload = function() {
+                document.getElementById("button").onclick = function() {
+                    const http = new XMLHttpRequest();
+                    const url = "paste1.txt";
+                    http.open("GET", url, false);
+                    http.send();
+                    encrypted = http.responseText;
+
+                    const key = document.getElementById("key").value;
+                    const decrypted = decrypt(encrypted, key);
+
+                    document.body.innerHTML = "";
+                    document.body.innerText = decrypted;
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <input type = "password" id = "key"></input>
+        <br><button id = "button">Submit</button>
+    </body>
+</html>
