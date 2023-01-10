@@ -16,7 +16,7 @@
             window.onload = function() {
                 document.getElementById("button").onclick = function() {
                     const http = new XMLHttpRequest();
-                    const url = "paste1.txt";
+                    const url = "paste.txt";
                     http.open("GET", url, false);
                     http.send();
                     encrypted = http.responseText;
